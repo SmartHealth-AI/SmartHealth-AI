@@ -6,7 +6,7 @@ from collections import Counter
 import pandas as pd
 import numpy as np
 
-df = pd.read_csv("./archive/medquad.csv", nrows=100)
+df = pd.read_csv("../archive/medquad.csv", nrows=100)
 
 # Hyperparameters (siêu tham số cho mô hình)
 
