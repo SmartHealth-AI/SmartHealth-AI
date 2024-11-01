@@ -40,7 +40,6 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
     email = models.EmailField(null=False, blank=False, unique=True)
-    #username = models.CharField(max_length=50, null=False, blank=False, default='Default username')
     first_name = models.CharField(max_length=50, blank=False, null=False, default='Default first name')
     last_name = models.CharField(max_length=50, blank=False, null=False, default='Default last name')
     is_admin = models.BooleanField(default=False)
