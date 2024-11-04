@@ -40,16 +40,29 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # apps
     'authentification',
+    'chat_bot',
     
     # Modules
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
+    'channels',
     
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
 
+ASGI_APPLICATION = 'backend.asgi.application'
+
+# Cấu hình CHANNEL_LAYERS để  sử dụng Redis 
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('127.0.0.1', 6379)],  # Địa chỉ Redis server của bạn
+        },
+    },
+}
 
 
 MIDDLEWARE = [
@@ -73,6 +86,8 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ]
 }
+# Django tự động thêm dấu gạch chéo trên urls 
+APPEND_SLASH = True
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

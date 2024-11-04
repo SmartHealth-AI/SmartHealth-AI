@@ -11,6 +11,17 @@ import os
 
 from django.core.asgi import get_asgi_application
 
+from channels.routing import ProtocolTypeRouter, URLRouter
+from channels.auth import AuthMiddlewareStack
+import chat_bot.routing 
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')
 
-application = get_asgi_application()
+application = ProtocolTypeRouter({
+    "http": get_asgi_application(),  # Xử lý giao thức HTTP thông thường
+    "websocket": AuthMiddlewareStack(
+        URLRouter(
+            chat_bot.routing.websocket_urlpatterns  # Định nghĩa các URL WebSocket
+        )
+    ),
+})
