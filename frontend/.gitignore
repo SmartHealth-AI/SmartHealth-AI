@@ -1,36 +1,42 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+node_modules
+node_modules/*
+coverage
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-.yarn/install-state.gz
+yarn.lock
+package-lock.json
 
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
+.husky
+.next
+.swc
+# Logs
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# local env files
-.env*.local
 
-# vercel
-.vercel
+dist
+dist-ssr
+uploads
+*.local
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+.ntvs
+*.njsproj
+*.sln
+*.sw?
+
+
+
+
+# Local Netlify folder
+.netlify
