@@ -63,7 +63,7 @@ const mockdata = [
   },
 ];
 
-export default function Header() {
+export function Header() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const theme = useMantineTheme();
