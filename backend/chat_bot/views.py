@@ -8,3 +8,5 @@ def chat_response(request):
         return JsonResponse({'response': ai_message})
     
     return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+#test-git
