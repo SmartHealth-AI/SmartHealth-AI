@@ -3,7 +3,7 @@
 import { clsx } from "clsx";
 import type { FC, ReactNode } from "react";
 import Footer from "../Footer";
-import Header from "../Header";
+import { Header } from "../Header/index";
 import { useAuth } from "@/libs/Auth";
 import Meta from "@/components/Meta";
 interface IProps {

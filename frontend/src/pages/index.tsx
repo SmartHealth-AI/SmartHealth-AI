@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Header from "@/layouts/Header";
+import {Header} from "@/layouts/Header";
 import Meta from "@/components/Meta";
 import DefaultLayout from "@/layouts/DefaultLayout"
 import Banner from "@/containers/home/Sections/Banner";
