@@ -14,8 +14,6 @@ import {
   Drawer,
   Collapse,
   ScrollArea,
-  rem,
-  useMantineTheme,
 } from '@mantine/core';
 import { MantineLogo } from '@mantinex/mantine-logo';
 import { useDisclosure } from '@mantine/hooks';
@@ -28,7 +26,6 @@ import {
   IconCoin,
   IconChevronDown,
 } from '@tabler/icons-react';
-import classes from './HeaderMegaMenu.module.css';
 
 const mockdata = [
   {
@@ -66,19 +63,18 @@ const mockdata = [
 export function Header() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
-  const theme = useMantineTheme();
 
   const links = mockdata.map((item) => (
-    <UnstyledButton className={classes.subLink} key={item.title}>
+    <UnstyledButton className="w-full px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" key={item.title}>
       <Group wrap="nowrap" align="flex-start">
         <ThemeIcon size={34} variant="default" radius="md">
-          <item.icon style={{ width: rem(22), height: rem(22) }} color={theme.colors.blue[6]} />
+          <item.icon className="w-6 h-6 text-blue-600" />
         </ThemeIcon>
         <div>
           <Text size="sm" fw={500}>
             {item.title}
           </Text>
-          <Text size="xs" c="dimmed">
+          <Text size="xs" className="text-gray-500">
             {item.description}
           </Text>
         </div>
@@ -87,74 +83,61 @@ export function Header() {
   ));
 
   return (
-    <Box pb={120}>
-      <header className={classes.header}>
-        <Group justify="space-between" h="100%">
+    <Box className="pb-32">
+      <header className="flex items-center justify-between h-16 px-4 border-b bg-white dark:bg-gray-900 dark:border-gray-800">
+        <Group className="flex items-center space-x-2">
           <MantineLogo size={30} />
-
-          <Group h="100%" gap={0} visibleFrom="sm">
-            <a href="#" className={classes.link}>
-              Home
-            </a>
-            <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
-              <HoverCard.Target>
-                <a href="#" className={classes.link}>
-                  <Center inline>
-                    <Box component="span" mr={5}>
-                      Features
-                    </Box>
-                    <IconChevronDown
-                      style={{ width: rem(16), height: rem(16) }}
-                      color={theme.colors.blue[6]}
-                    />
-                  </Center>
-                </a>
-              </HoverCard.Target>
-
-              <HoverCard.Dropdown style={{ overflow: 'hidden' }}>
-                <Group justify="space-between" px="md">
-                  <Text fw={500}>Features</Text>
-                  <Anchor href="#" fz="xs">
-                    View all
-                  </Anchor>
-                </Group>
-
-                <Divider my="sm" />
-
-                <SimpleGrid cols={2} spacing={0}>
-                  {links}
-                </SimpleGrid>
-
-                <div className={classes.dropdownFooter}>
-                  <Group justify="space-between">
-                    <div>
-                      <Text fw={500} fz="sm">
-                        Get started
-                      </Text>
-                      <Text size="xs" c="dimmed">
-                        Their food sources have decreased, and their numbers
-                      </Text>
-                    </div>
-                    <Button variant="default">Get started</Button>
-                  </Group>
-                </div>
-              </HoverCard.Dropdown>
-            </HoverCard>
-            <a href="#" className={classes.link}>
-              Learn
-            </a>
-            <a href="#" className={classes.link}>
-              Academy
-            </a>
-          </Group>
-
-          <Group visibleFrom="sm">
-            <Button variant="default">Log in</Button>
-            <Button>Sign up</Button>
-          </Group>
-
-          <Burger opened={drawerOpened} onClick={toggleDrawer} hiddenFrom="sm" />
         </Group>
+
+        <div className="hidden sm:flex space-x-4">
+          <a href="#" className="flex items-center h-full px-4 text-gray-700 dark:text-white">
+            Home
+          </a>
+          <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
+            <HoverCard.Target>
+              <a href="#" className="flex items-center h-full px-4 text-gray-700 dark:text-white">
+                <Center inline>
+                  <span className="mr-1">Features</span>
+                  <IconChevronDown className="w-4 h-4 text-blue-600" />
+                </Center>
+              </a>
+            </HoverCard.Target>
+
+            <HoverCard.Dropdown className="overflow-hidden">
+              <div className="flex justify-between px-4 py-2">
+                <Text fw={500}>Features</Text>
+                <Anchor href="#" className="text-xs">View all</Anchor>
+              </div>
+
+              <Divider className="my-2" />
+
+              <SimpleGrid cols={2} spacing={0}>
+                {links}
+              </SimpleGrid>
+
+              <div className="bg-gray-50 dark:bg-gray-800 px-4 py-3 rounded-b-md">
+                <div className="flex justify-between">
+                  <div>
+                    <Text fw={500} className="text-sm">Get started</Text>
+                    <Text size="xs" className="text-gray-500">
+                      Their food sources have decreased, and their numbers
+                    </Text>
+                  </div>
+                  <Button variant="default">Get started</Button>
+                </div>
+              </div>
+            </HoverCard.Dropdown>
+          </HoverCard>
+          <a href="#" className="flex items-center h-full px-4 text-gray-700 dark:text-white">Learn</a>
+          <a href="#" className="flex items-center h-full px-4 text-gray-700 dark:text-white">Academy</a>
+        </div>
+
+        <div className="hidden sm:flex space-x-4">
+          <Button variant="default">Log in</Button>
+          <Button>Sign up</Button>
+        </div>
+
+        <Burger opened={drawerOpened} onClick={toggleDrawer} className="sm:hidden" />
       </header>
 
       <Drawer
@@ -163,37 +146,26 @@ export function Header() {
         size="100%"
         padding="md"
         title="Navigation"
-        hiddenFrom="sm"
+        className="sm:hidden"
         zIndex={1000000}
       >
-        <ScrollArea h={`calc(100vh - ${rem(80)})`} mx="-md">
-          <Divider my="sm" />
+        <ScrollArea style={{ height: 'calc(100vh - 80px)', margin: '-1rem' }}>
+          <Divider className="my-2" />
 
-          <a href="#" className={classes.link}>
-            Home
-          </a>
-          <UnstyledButton className={classes.link} onClick={toggleLinks}>
+          <a href="#" className="block px-4 py-2 text-gray-700 dark:text-white">Home</a>
+          <UnstyledButton className="block w-full px-4 py-2 text-left text-gray-700 dark:text-white" onClick={toggleLinks}>
             <Center inline>
-              <Box component="span" mr={5}>
-                Features
-              </Box>
-              <IconChevronDown
-                style={{ width: rem(16), height: rem(16) }}
-                color={theme.colors.blue[6]}
-              />
+              <span className="mr-1">Features</span>
+              <IconChevronDown className="w-4 h-4 text-blue-600" />
             </Center>
           </UnstyledButton>
           <Collapse in={linksOpened}>{links}</Collapse>
-          <a href="#" className={classes.link}>
-            Learn
-          </a>
-          <a href="#" className={classes.link}>
-            Academy
-          </a>
+          <a href="#" className="block px-4 py-2 text-gray-700 dark:text-white">Learn</a>
+          <a href="#" className="block px-4 py-2 text-gray-700 dark:text-white">Academy</a>
 
-          <Divider my="sm" />
+          <Divider className="my-2" />
 
-          <Group justify="center" grow pb="xl" px="md">
+          <Group className="flex justify-center gap-4 py-4">
             <Button variant="default">Log in</Button>
             <Button>Sign up</Button>
           </Group>

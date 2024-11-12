@@ -60,15 +60,15 @@ const SignIn = ({ query }: any) => {
     return url.includes("http") || url.includes("https");
   };
 
-  const isArobidUrl = (url: string) => {
-    const hostRegex = /(?:https?:\/\/)?(?:[^@\n]+@)?([^:/\n?]+)/g;
-    const rootDomains = ["arobid.com", "arobidbeta.online", "localhost"];
+  // const isArobidUrl = (url: string) => {
+  //   const hostRegex = /(?:https?:\/\/)?(?:[^@\n]+@)?([^:/\n?]+)/g;
+  //   // const rootDomains = ["arobid.com", "arobidbeta.online", "localhost"];
 
-    return rootDomains.some((rootDomain) => {
-      const host = url.match(hostRegex)?.[0];
-      return host?.includes(rootDomain);
-    });
-  };
+  //   return rootDomains.some((rootDomain) => {
+  //     const host = url.match(hostRegex)?.[0];
+  //     return host?.includes(rootDomain);
+  //   });
+  // };
 
   const onSubmit = async (value: any) => {
     if (isLoggingIn) return;
@@ -77,26 +77,26 @@ const SignIn = ({ query }: any) => {
     
       const redirectUrl = router.query?.redirect_url as string;
       const latestPath = redirectUrl || localStorage.getItem(`path-${value?.email}`);
-      if (latestPath) {
-        // Open new tab if redirect to external url
-        if (isUrl(latestPath) && isArobidUrl(latestPath)) {
-          // open new tab
-          window.open(latestPath, "_blank");
-          router.push("/");
-          return;
-        }
+      // if (latestPath) {
+      //   // Open new tab if redirect to external url
+      //   if (isUrl(latestPath) && isArobidUrl(latestPath)) {
+      //     // open new tab
+      //     window.open(latestPath, "_blank");
+      //     router.push("/");
+      //     return;
+      //   }
 
-        // Prevent redirect to external url
-        if (!isArobidUrl(latestPath)) {
-          router.push("/");
-          return;
-        }
+      //   // Prevent redirect to external url
+      //   if (!isArobidUrl(latestPath)) {
+      //     router.push("/");
+      //     return;
+      //   }
 
-        // Redirect to latest path
-        router.push(latestPath);
-      } else {
-        router.push("/");
-      }
+      //   // Redirect to latest path
+      //   router.push(latestPath);
+      // } else {
+      //   router.push("/");
+      // }
     });
   };
 
